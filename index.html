@@ -17,11 +17,12 @@
         <h1>Retrouvez une entreprise grâce à son numéro SIRET</h1>
         <div class="container">
             <!-- Formulaire de saisie de la recherche -->
-            <form name="FormSearch"> 
+            <form name="FormSearch" id="FormSearch"> 
 
-                <label>Numéro SIRET:</label> <input type="text" id="SIRET" name="SIRET" required>
+                <label>Numéro SIRET:</label> 
+                <input type="text" id="SIRET" name="SIRET" required>
                 
-                <input type="button" onClick="Search()" id="btnSearch" name="btnSearch" value="Rechercher">
+                <input type="button" id="btnSearch" name="btnSearch" value="Rechercher">
             </form>
         </div>
         <!-- Div où il y aura le résultat -->
@@ -30,3 +31,4 @@
         </div>
     </body>
 </html>
+
