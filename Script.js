@@ -26,6 +26,7 @@ function Search() {
         var tableauBody = document.createElement("tbody");
 
         //Traitement des données dans le tableau 
+        var i = 0
         for (const key in request.response.etablissement){
             var row = document.createElement("tr");
             var id_cell = document.createElement("td");
@@ -36,14 +37,41 @@ function Search() {
             var content_text = document.createTextNode(request.response.etablissement[key]);
             content_cell.appendChild(content_text);
             row.appendChild(content_cell);
-
+            //On décide de n'afficher que les 4 premières informations de l'entrepries
+            if(i > 3){
+                row.hidden = true;
+            }
             tableauBody.appendChild(row);
-
-            
+            i++;            
         }
 
         //On affiche le tableau
         tableau.appendChild(tableauBody)
         DivResult.appendChild(tableau)
+
+        //Création du bouton permettant d'afficher les informations cachées
+        var display_button = document.createElement("button");
+        display_button.setAttribute("id","disp");
+        display_button.textContent = "Plus d'informations";
+        DivResult.appendChild(display_button);
+
+        //Fonctionnement du bouton 
+        var etatBtn = true;
+        document.getElementById("disp").onclick = function(){
+            if (etatBtn == true){
+                tableauBody.querySelectorAll("tr").forEach(function(InvisibleRow){
+                    InvisibleRow.hidden = false;
+                })
+                display_button.textContent = "Moins d'informations";
+                etatBtn = false;
+            } else {
+                lenTab = tableauBody.querySelectorAll("tr").length;
+                for (var j = 4; j < lenTab; j++){
+                    tableauBody.querySelectorAll("tr")[j].hidden = true;
+                }
+                display_button.textContent = "Plus d'informations";
+                etatBtn = true;
+            }
+        }
     }
 }
